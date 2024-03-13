@@ -11,6 +11,7 @@ module.exports = {
     {
       name: "@electron-forge/maker-squirrel",
       config: {
+        bin: "hotclue",
         setupIcon: "./assets/images/icon.ico",
       },
     },
@@ -18,12 +19,14 @@ module.exports = {
       name: "@electron-forge/maker-zip",
       platforms: ["darwin"],
       config: {
+        bin: "hotclue",
         icon: "./assets/images/icon.icns",
       },
     },
     {
       name: "@electron-forge/maker-deb",
       config: {
+        bin: "hotclue",
         options: {
           icon: "./assets/images/icon.png",
         },
@@ -31,7 +34,10 @@ module.exports = {
     },
     {
       name: "@electron-forge/maker-rpm",
-      config: {},
+      config: {
+        bin: "hotclue",
+        icon: "./assets/images/icon.png",
+      },
     },
   ],
   plugins: [
@@ -69,5 +75,18 @@ module.exports = {
       [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
       [FuseV1Options.OnlyLoadAppFromAsar]: true,
     }),
+  ],
+  publishers: [
+    {
+      name: "@electron-forge/publisher-github",
+      config: {
+        repository: {
+          owner: "cristijigau",
+          name: "hot-clue",
+        },
+        prerelease: true,
+        draft: true,
+      },
+    },
   ],
 };

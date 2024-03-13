@@ -1,6 +1,7 @@
 {
   "name": "hotclue",
-  "version": "1.0.0",
+  "productName": "hotclue",
+  "version": "1.0.1",
   "description": "Hotkey clues on your desktop",
   "main": ".webpack/main",
   "scripts": {
@@ -8,7 +9,8 @@
     "build": "webpack",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "keywords": [
     "hotkey",
@@ -27,10 +29,11 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.3.0",
     "@electron-forge/plugin-fuses": "^7.3.0",
     "@electron-forge/plugin-webpack": "^7.3.0",
-    "electron": "29.1.2",
+    "@electron-forge/publisher-github": "^7.3.0",
     "@electron/fuses": "^1.7.0",
     "@vercel/webpack-asset-relocator-loader": "1.7.3",
     "css-loader": "^6.0.0",
+    "electron": "29.1.2",
     "node-loader": "^2.0.0",
     "style-loader": "^3.0.0"
   },

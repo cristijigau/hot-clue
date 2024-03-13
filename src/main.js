@@ -24,6 +24,8 @@ const createWindow = () => {
   win.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 };
 
+if (require("electron-squirrel-startup") === true) app.quit();
+
 app.whenReady().then(() => {
   createWindow();
 
