@@ -1,0 +1,17 @@
+{
+  "Ctrl+Shift+N / Ctrl+Shift+W": "New window / Close window",
+  "Alt+ ↑ / ↓ ": "Move line up/down",
+  "Shift+Alt + ↓ / ↑": "Copy line up/down",
+  "Ctrl+Shift+K": "Delete line",
+  "Ctrl+Shift+Enter": "Insert line above",
+  "Ctrl+Shift+\\": "Jump to matching bracket",
+  "Ctrl+] / [": "Indent/outdent line",
+  "Home / End": "Go to beginning/end of line",
+  "Ctrl+Home / Ctrl+End": "Go to beginning / end of file",
+  "Shift+Alt+A": "Toggle block comment",
+  "Alt+Click": "Insert cursor",
+  "Ctrl+Alt+ ↑ / ↓": "Insert cursor above / below",
+  "Shift+Alt+I": "Insert cursor at end of each line selected",
+  "Ctrl+L": "Select current line",
+  "Ctrl+\\": "Split editor"
+}

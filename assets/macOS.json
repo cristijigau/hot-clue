@@ -1,0 +1,17 @@
+{
+  "⇧⌘N/ ⌘W": "New window / Close window",
+  "⌥↓ / ⌥↑": "Move line up/down",
+  "⇧⌥↓ / ⇧⌥↑": "Copy line up/down",
+  "⇧⌘K": "Delete line",
+  "⌘Enter / ⇧⌘Enter": "Insert line below/above",
+  "⇧⌘\\": "Jump to matching bracket",
+  "⌘] / ⌘[": "Indent/outdent line",
+  "Home / End": "Go to beginning/end of line",
+  "⌘↑ / ⌘↓": "Go to beginning / end of file",
+  "⇧⌥A": "Toggle block comment",
+  "⌥ + click": "Insert cursor",
+  "⌥⌘↑ / ⌥⌘↓": "Insert cursor above / below",
+  "⇧⌥I": "Insert cursor at end of each line selected",
+  "⌘L": "Select current line",
+  "⌘\\": "Split editor"
+}
