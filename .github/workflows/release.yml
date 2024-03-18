@@ -22,5 +22,5 @@ jobs:
       - run: npm ci
       - name: Publish app
         env:
-          GITHUB_TOKEN: ${{ secrets.HOTCLUE_FORGE_PAT }}
+          GITHUB_TOKEN: ${{ secrets.PAT_FORGE }}
         run: npm run publish
