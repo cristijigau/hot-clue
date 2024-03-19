@@ -53,11 +53,19 @@ module.exports = {
           config: "./webpack.renderer.config.js",
           entryPoints: [
             {
-              name: "main_window",
-              html: "./src/index.html",
-              js: "./src/renderer.js",
+              name: "settings_window",
+              html: "./src/windows/settings/index.html",
+              js: "./src/windows/settings/renderer.js",
               preload: {
-                js: "./src/preload.js",
+                js: "./src/windows/settings/preload.js",
+              },
+            },
+            {
+              name: "overlay_window",
+              html: "./src/windows/overlay/index.html",
+              js: "./src/windows/overlay/renderer.js",
+              preload: {
+                js: "./src/windows/overlay/preload.js",
               },
             },
           ],

@@ -1,6 +1,47 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, dialog, ipcMain } = require("electron");
+const fs = require("node:fs");
 
-const createWindow = () => {
+const closeSettingsWindow = () => {
+  const [_overlayWindow, settingsWindow] = BrowserWindow.getAllWindows();
+  settingsWindow.close();
+};
+
+const handleFileOpen = async () => {
+  const { canceled, filePaths } = await dialog.showOpenDialog(undefined, {
+    filters: [{ name: "JSON", extensions: ["json"] }],
+  });
+
+  if (!canceled) {
+    fs.readFile(filePaths[0], (err, data) => {
+      if (!err) {
+        const fileData = JSON.parse(data);
+
+        const overlayWindow = createOverlayWindow();
+
+        overlayWindow.addListener("ready-to-show", () => {
+          overlayWindow.webContents.send("clues-data-loaded", fileData);
+          closeSettingsWindow();
+        });
+      }
+    });
+  }
+};
+
+const handleDefault = () => {
+  const overlayWindow = createOverlayWindow();
+
+  overlayWindow.addListener("ready-to-show", () => {
+    overlayWindow.webContents.send("clues-data-loaded", null);
+    closeSettingsWindow();
+  });
+};
+
+const addCommunicationListeners = () => {
+  ipcMain.on("dialog:openFile", handleFileOpen);
+  ipcMain.on("use-default-data", handleDefault);
+};
+
+const createOverlayWindow = () => {
   const win = new BrowserWindow({
     fullscreen: true,
     resizable: false,
@@ -8,30 +49,43 @@ const createWindow = () => {
     minimizable: false,
     closable: false,
     focusable: false,
-    skipTaskbar: false,
     alwaysOnTop: true,
     frame: false,
     autoHideMenuBar: true,
     hasShadow: false,
     transparent: true,
     webPreferences: {
-      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      preload: OVERLAY_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },
   });
 
+  win.setSkipTaskbar(false);
   win.setIgnoreMouseEvents(true);
+  win.loadURL(OVERLAY_WINDOW_WEBPACK_ENTRY);
 
-  win.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
+  return win;
+};
+
+const createSettingsWindow = () => {
+  const win = new BrowserWindow({
+    autoHideMenuBar: true,
+    webPreferences: {
+      preload: SETTINGS_WINDOW_PRELOAD_WEBPACK_ENTRY,
+    },
+  });
+
+  win.loadURL(SETTINGS_WINDOW_WEBPACK_ENTRY);
 };
 
 if (require("electron-squirrel-startup") === true) app.quit();
 
 app.whenReady().then(() => {
-  createWindow();
+  createSettingsWindow();
+  addCommunicationListeners();
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      createSettingsWindow();
     }
   });
 });
